@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cao Minh Huy | Quan Ly Sach</title>
+  <style>
+    :root {
+      --bg: #e8f0f5;
+      --ink: #172033;
+      --muted: #4f5d75;
+      --card: #ffffff;
+      --line: #d7dfeb;
+      --accent: #0f766e;
+      --accent-soft: #d7faf3;
+      --danger: #b42318;
+      --danger-soft: #ffe5e1;
+      --shadow: 0 20px 45px rgba(23, 32, 51, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 600px at -10% -10%, #c8f5ec 0%, transparent 60%),
+        radial-gradient(700px 500px at 110% -10%, #c7ddff 0%, transparent 60%),
+        linear-gradient(180deg, #edf3fb 0%, #e7eff5 100%);
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(28px, 4.2vw, 42px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .intro {
+      margin-top: 12px;
+      margin-bottom: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .chip {
+      display: inline-block;
+      margin-top: 18px;
+      background: var(--accent-soft);
+      color: #0a635c;
+      border: 1px solid #b7ebe0;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .row {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      padding: 11px 12px;
+      font: inherit;
+      color: var(--ink);
+      background: #fbfdff;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #7ea9ff;
+      box-shadow: 0 0 0 3px rgba(126, 169, 255, .2);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 11px;
+      padding: 10px 14px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 8px 18px rgba(15, 118, 110, .28);
+    }
+
+    .btn-secondary {
+      background: #eef3fa;
+      color: #20304a;
+      border: 1px solid var(--line);
+    }
+
+    .btn-danger {
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid #f5b5ac;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 12px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .status.ok {
+      color: #0c7c59;
+    }
+
+    .status.error {
+      color: #b42318;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 13px;
+      color: #37517a;
+      background: #f0f5ff;
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    tbody td {
+      padding: 10px;
+      border-top: 1px solid #edf1f7;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    .mini-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .mini-actions button {
+      padding: 7px 10px;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    .empty {
+      color: var(--muted);
+      text-align: center;
+      padding: 20px 12px;
+    }
+
+    @media (max-width: 950px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="panel">
+      <p class="chip">PROFILE + BOOK CRUD</p>
+      <h1 class="title">Cao Minh Huy</h1>
+      <p class="intro">
+        Trang nay ket hop gioi thieu ban than va giao dien CRUD sach su dung API Spring Boot + JPA + H2.
+        Du lieu sach duoc thao tac truc tiep tai <strong>/api/books</strong>.
+      </p>
+      <p class="intro">
+        Docker Hub:
+        <a href="https://hub.docker.com/r/minhhuyy/caominhhuy" target="_blank" rel="noopener">minhhuyy/caominhhuy</a>
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2 style="margin-top: 0;">Quan Ly Sach</h2>
+
+      <div class="row">
+        <label for="title">Ten sach</label>
+        <input id="title" type="text" placeholder="Vi du: Clean Code">
+      </div>
+
+      <div class="row">
+        <label for="author">Tac gia</label>
+        <input id="author" type="text" placeholder="Vi du: Robert C. Martin">
+      </div>
+
+      <div class="row">
+        <label for="year">Nam xuat ban</label>
+        <input id="year" type="number" min="0" placeholder="Vi du: 2008">
+      </div>
+
+      <div class="actions">
+        <button id="saveBtn" class="btn-primary">Them Sach</button>
+        <button id="clearBtn" class="btn-secondary" type="button">Lam Moi Form</button>
+      </div>
+
+      <div id="status" class="status"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 55px;">ID</th>
+            <th>Ten Sach</th>
+            <th>Tac Gia</th>
+            <th style="width: 130px;">Nam</th>
+            <th style="width: 170px;">Hanh Dong</th>
+          </tr>
+        </thead>
+        <tbody id="bookTableBody">
+          <tr><td class="empty" colspan="5">Dang tai du lieu...</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <script>
+    const apiBase = "/api/books";
+    const titleEl = document.getElementById("title");
+    const authorEl = document.getElementById("author");
+    const yearEl = document.getElementById("year");
+    const saveBtn = document.getElementById("saveBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const statusEl = document.getElementById("status");
+    const tableBody = document.getElementById("bookTableBody");
+
+    let editingId = null;
+
+    function setStatus(message, type) {
+      statusEl.textContent = message || "";
+      statusEl.className = "status" + (type ? " " + type : "");
+    }
+
+    function clearForm() {
+      editingId = null;
+      titleEl.value = "";
+      authorEl.value = "";
+      yearEl.value = "";
+      saveBtn.textContent = "Them Sach";
+      setStatus("");
+    }
+
+    function fillForm(book) {
+      editingId = book.id;
+      titleEl.value = book.title;
+      authorEl.value = book.author;
+      yearEl.value = book.publishedYear;
+      saveBtn.textContent = "Cap Nhat";
+      setStatus("Dang sua sach ID " + book.id, "ok");
+    }
+
+    function validatePayload() {
+      const title = titleEl.value.trim();
+      const author = authorEl.value.trim();
+      const publishedYear = Number(yearEl.value);
+
+      if (!title || !author || !yearEl.value) {
+        setStatus("Vui long nhap day du title, author, publishedYear.", "error");
+        return null;
+      }
+      if (Number.isNaN(publishedYear)) {
+        setStatus("publishedYear phai la so hop le.", "error");
+        return null;
+      }
+      return { title, author, publishedYear };
+    }
+
+    async function fetchBooks() {
+      try {
+        const res = await fetch(apiBase);
+        if (!res.ok) throw new Error("Khong lay duoc danh sach sach.");
+        const books = await res.json();
+        renderTable(books);
+      } catch (err) {
+        tableBody.innerHTML = "<tr><td class='empty' colspan='5'>" + err.message + "</td></tr>";
+      }
+    }
+
+    function renderTable(books) {
+      if (!Array.isArray(books) || books.length === 0) {
+        tableBody.innerHTML = "<tr><td class='empty' colspan='5'>Chua co du lieu sach.</td></tr>";
+        return;
+      }
+
+      tableBody.innerHTML = books.map((book) => (
+        "<tr>" +
+          "<td>" + book.id + "</td>" +
+          "<td>" + escapeHtml(book.title) + "</td>" +
+          "<td>" + escapeHtml(book.author) + "</td>" +
+          "<td>" + book.publishedYear + "</td>" +
+          "<td>" +
+            "<div class='mini-actions'>" +
+              "<button class='btn-secondary' data-action='edit' data-id='" + book.id + "'>Sua</button>" +
+              "<button class='btn-danger' data-action='delete' data-id='" + book.id + "'>Xoa</button>" +
+            "</div>" +
+          "</td>" +
+        "</tr>"
+      )).join("");
+    }
+
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    async function saveBook() {
+      const payload = validatePayload();
+      if (!payload) return;
+
+      const isUpdate = editingId !== null;
+      const url = isUpdate ? apiBase + "/" + editingId : apiBase;
+      const method = isUpdate ? "PUT" : "POST";
+
+      try {
+        const res = await fetch(url, {
+          method,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error("Luu sach that bai.");
+        setStatus(isUpdate ? "Cap nhat sach thanh cong." : "Them sach thanh cong.", "ok");
+        clearForm();
+        await fetchBooks();
+      } catch (err) {
+        setStatus(err.message, "error");
+      }
+    }
+
+    async function deleteBook(id) {
+      if (!confirm("Ban chac chan muon xoa sach ID " + id + "?")) return;
+      try {
+        const res = await fetch(apiBase + "/" + id, { method: "DELETE" });
+        if (!res.ok) throw new Error("Xoa sach that bai.");
+        setStatus("Xoa sach thanh cong.", "ok");
+        if (editingId === id) clearForm();
+        await fetchBooks();
+      } catch (err) {
+        setStatus(err.message, "error");
+      }
+    }
+
+    async function editBook(id) {
+      try {
+        const res = await fetch(apiBase + "/" + id);
+        if (!res.ok) throw new Error("Khong lay duoc thong tin sach.");
+        const book = await res.json();
+        fillForm(book);
+      } catch (err) {
+        setStatus(err.message, "error");
+      }
+    }
+
+    saveBtn.addEventListener("click", saveBook);
+    clearBtn.addEventListener("click", clearForm);
+
+    tableBody.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLButtonElement)) return;
+      const id = Number(target.getAttribute("data-id"));
+      const action = target.getAttribute("data-action");
+      if (!id || !action) return;
+      if (action === "edit") editBook(id);
+      if (action === "delete") deleteBook(id);
+    });
+
+    fetchBooks();
+  </script>
+</body>
+</html>
